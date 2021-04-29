@@ -13,9 +13,15 @@ class App extends Component {
         ]
     }
 
-    addTodoItem = (item) => {
+    deleteItem = (event) => {
+        event.target.parentElement.remove();
+    }
+
+    id = 3;
+
+    addTodoItem = (id, item) => {
         this.setState({
-            todoItems: [...this.state.todoItems, item]
+            todoItems: [...this.state.todoItems, { id, ...item }]
         })
     }
 
@@ -24,7 +30,7 @@ class App extends Component {
             <div id="todo-list">
                 <header><h1>TodoList</h1></header>
                 <NewItemForm onSubmit={this.addTodoItem} />
-                <TodoItems todoItems={this.state.todoItems} />
+                <TodoItems todoItems={this.state.todoItems} deleteItems={this.deleteItem} />
             </div>
         );
 }
