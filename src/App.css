@@ -1,38 +1,76 @@
-.App {
-  text-align: center;
+#root {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#root>#todo-item-form {
+    margin: auto;
+    width: 200px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#list, #root {
+    display: flex;
+    flex-direction: column;
+    min-width: 350px;
+    max-width: 600px;
+
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.only-open>.done {
+    display: none;
 }
 
-.App-link {
-  color: #61dafb;
+#create-item-form {
+    height: 1.3em;
+    display: flex;
+    flex-direction: row;
+    align-items: normal;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.item {
+    margin-top: 10px;
+    border: violet 1px dotted;
+    display: flex;
+    align-items: center;
+    background-color: #9eda59;
+
+}
+
+.title, .description .date {
+    margin-left: 10px;
+}
+
+#checkbox {
+    width: 20px;
+}
+
+.done .title {
+    text-decoration: line-through;
+}
+
+.line-through .title, .line-through .description {
+    color: gray;
+}
+
+.title {
+    flex: 1;
+    line-height: 150%;
+    font-size: 120%;
+    color: black;
+}
+
+.description {
+    flex: 2;
+    color: darkgreen;
+}
+
+.date {
+    flex: 1;
+    margin-left: 10px;
+}
+
+.overdue-date {
+    color: red;
 }
