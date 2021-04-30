@@ -8,7 +8,7 @@ const TodoItems = (props) => {
 
     return (
         <div id="list">
-            { todoItems.length ? todoItems.map((item, i) => <TodoItem item={item} key={i} deleteItem={deleteItem} />)
+            { todoItems && todoItems.length ? todoItems.map((item, i) => <TodoItem item={item} key={i} deleteItem={deleteItem} />)
                                 : <p>There are no one task here</p>
             }
         </div>

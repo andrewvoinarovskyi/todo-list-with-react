@@ -85,8 +85,9 @@
 }
 
 aside li {
-    style: none;
+    list-style: none;
 }
+
 
 /*
 .only-open>.done {
