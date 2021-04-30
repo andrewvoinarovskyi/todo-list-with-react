@@ -1,47 +1,41 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 
-class NewItemForm extends Component {
-    id = 3;
+function NewItemForm (props) {
+    const [id, setId] = useState(4);
 
-    state = {
-        todoItem: {},
-    };
+    const [todoItem, setItem] = useState({
+        title: '',
+        description: '',
+        date: '',
+        });
 
-    onSubmitHandler = (event) => {
-        event.preventDefault()
-        this.props.onSubmit(++this.id, this.state.todoItem)
+    const onSubmitHandler = (event) => {
+        event.preventDefault();
+        props.onSubmit(id, todoItem);
         event.currentTarget.reset();
+        setId(id + 1);
     }
 
-
-
-    onChange = (event) => {
-        this.setState( {
-            todoItem: {
-                title: event.currentTarget.title.value,
-                description: event.currentTarget.description.value,
-                date: event.currentTarget.date.value
-                    ? new Date(event.currentTarget.date.value)
-                    : '',
-            }
-        })
-    }
-
-    render() {
-        return (
-            <form
-              id="create-item-form"
-              onSubmit={this.onSubmitHandler}
-              onChange={this.onChange}
-              autoComplete="off">
-                <input name="title" type="text" />
-                <input name="description" type="text" />
-                <input name="date" type="date" />
-                <button type="submit">Add</button>
-            </form>
-        )
-    }
-
+    return (
+        <form
+          id="new-item-form"
+          className="item"
+          onSubmit={onSubmitHandler}
+          onChange={(event) => {
+              const {title, description, date} = event.currentTarget;
+              setItem({
+                  title: title.value,
+                  description: description.value,
+                  date: date.value && new Date(date.value)
+              })
+          }}
+          autoComplete="off">
+              <input name="title" type="text" required placeholder="Title" />
+              <input name="description" type="text" placeholder="Description" />
+              <input name="date" type="date" />
+              <button type="submit">Add</button>
+        </form>
+    )
 }
 
 export default NewItemForm;

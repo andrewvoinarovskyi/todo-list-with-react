@@ -4,7 +4,8 @@ import TodoItem from "./TodoItem/TodoItem";
 
 const TodoItems = (props) => {
     const todoItems = props.todoItems;
-    const deleteItem = props.deleteItems;
+    const deleteItem = props.deleteItem;
+
     return (
         <div id="list">
             { todoItems.length ? todoItems.map((item, i) => <TodoItem item={item} key={i} deleteItem={deleteItem} />)
