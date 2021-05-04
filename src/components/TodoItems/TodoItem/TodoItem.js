@@ -1,6 +1,6 @@
 import React from "react";
 
-const TodoItem = ({item, deleteItem}) => {
+const TodoItem = ({item, deleteTodoItem}) => {
     const { title, description, date } = item;
     return (
         <div className="item">
@@ -8,7 +8,7 @@ const TodoItem = ({item, deleteItem}) => {
             <p className="title">{title.toUpperCase()}</p>
             <p className="description">{description}</p>
             <p className="date">{date ? date.toDateString() : ''}</p>
-            <button className="delete" onClick={(event) => deleteItem(item)}>{'\u{1F5D1}'}</button>
+            <button className="delete" onClick={(event) => deleteTodoItem(item)}>{'\u{1F5D1}'}</button>
         </div>
     )
 }

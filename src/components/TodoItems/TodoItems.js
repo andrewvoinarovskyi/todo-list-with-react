@@ -2,14 +2,14 @@ import React from "react";
 
 import TodoItem from "./TodoItem/TodoItem";
 
-const TodoItems = (props) => {
-    const todoItems = props.todoItems;
-    const deleteItem = props.deleteItem;
+const TodoItems = ({selectedList}) => {
+    const todoItems = selectedList.todoItems.todoItems;
+    const deleteTodoItem = selectedList.todoItems.deleteTodoItem;
 
     return (
         <div id="list">
-            { todoItems && todoItems.length ? todoItems.map((item, i) => <TodoItem item={item} key={i} deleteItem={deleteItem} />)
-                                : <p>There are no one task here</p>
+            { todoItems ? todoItems.map((item, i) => <TodoItem item={item} key={i} deleteTodoItem={deleteTodoItem} />)
+                                : <p>There are no one task here or Choose list</p>
             }
         </div>
     )
