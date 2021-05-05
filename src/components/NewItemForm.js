@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function NewItemForm (props) {
+function NewItemForm ({ listId, onSubmit }) {
     const [id, setId] = useState(4);
 
     const [todoItem, setItem] = useState({
@@ -11,7 +11,8 @@ function NewItemForm (props) {
 
     const onSubmitHandler = (event) => {
         event.preventDefault();
-        props.onSubmit(id, todoItem);
+        console.log(listId)
+        onSubmit({type: 'addTodoItem', listId, id, item: todoItem});
         event.currentTarget.reset();
         setId(id + 1);
     }

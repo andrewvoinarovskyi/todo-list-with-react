@@ -1,5 +1,5 @@
  import './App.css';
- import { useState } from "react";
+ import {useEffect, useReducer, useState} from "react";
  import {
 	 BrowserRouter as Router,
 	 Switch,
@@ -8,57 +8,48 @@
 	 useParams
  } from "react-router-dom";
 
+ import reducer from './components/reducer/Reducer'
+
  import NewItemForm from "./components/NewItemForm";
  import TodoItems from "./components/TodoItems/TodoItems";
  import Dashboard from "./components/Dashboard/Dashboard";
 
- const useTodoItems = (items) => {
-     const [todoItems, setTodoItems] = useState(items);
-     return {
-         todoItems,
-         addTodoItem: (id, item) => {
-     	    setTodoItems([...todoItems, {id, ...item}])
-         },
-         deleteTodoItem: (item) => {
-	         console.log(item);
-	         return todoItems.filter(todoItem => todoItem !== item)
-         },
-     }
- }
-
 function App() {
-    const firstList = useTodoItems([
-        {id: 1, title: 'bla bla', description: 'some new description', date: new Date(2021,10,22) },
-        {id: 2, title: 'second title', description: 'without description', date: new Date(2021,10,21) },
-        {id: 3, title: 'Use React', description: '', date: new Date(2021,10,20) },
-    ])
-	  const secondList = useTodoItems([
-        {id: 1, title: 'bla bla', description: 'some new description', date: new Date(2021,10,22) },
-        {id: 2, title: 'second title', description: 'without description', date: new Date(2021,10,21) },
-    ])
 
-    const [todoLists, setTodoLists] = useState([
-        { id: 1, title: "First list", todoItems: firstList },
-        { id: 2, title: "Second list", todoItems: secondList }
-    ])
+    const [todoList, dispatch] = useReducer(reducer, {
+        lists: [
+            { id: 1, title: "first list" },
+            { id: 2, title: "second list" }
+        ],
+        tasks: [
+            {listId: 1, id: 1, title: 'bla bla', description: 'some new description', date: new Date(2021, 10, 22)},
+            {listId: 1, id: 2, title: 'second title', description: 'without description', date: new Date(2021, 10, 21)},
+            {listId: 1, id: 3, title: 'Use React', description: '', date: new Date(2021, 10, 20)},
+            {listId: 2, id: 1, title: 'bla bla', description: 'some new description', date: new Date(2021, 10, 22)},
+            {listId: 2, id: 2, title: 'second title', description: 'without description', date: new Date(2021, 10, 21)},
+        ],
+    });
 
-		const [selectedListId, setSelectedListId] = useState();
+    const [selectedList, setSelectedList] = useState(0);
 
-    const getListById = (id) => {
-    	return setSelectedListId(id);
+    const getListId = (id) => {
+        console.log(selectedList);
+    	return setSelectedList(id);
     }
 
-		return (
+    return (
         <section>
             <header>
 	            <h1>TodoList</h1>
             </header>
             <div id="root">
-                <Dashboard todoLists={todoLists} getListById={getListById} />
-	              {selectedListId && <>
-		                <TodoItems selectedList={todoLists.filter((list) => list.id === selectedListId)[0]} />
-	                  <NewItemForm onSubmit={todoLists.filter((list) => list.id === selectedListId)[0].todoItems.addTodoItem} />
-	                </>
+                <Dashboard todoList={todoList} getListId={getListId} />
+	              {selectedList !== 0
+                      ? <>
+                            <TodoItems todoList={ todoList.tasks } selectedList={selectedList} dispatch={dispatch} />
+                            <NewItemForm onSubmit={dispatch} listId={selectedList}/>
+	                    </>
+                      : <p>Choose todo list</p>
 	              }
             </div>
         </section>

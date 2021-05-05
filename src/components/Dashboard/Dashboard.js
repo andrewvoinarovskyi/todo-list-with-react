@@ -1,10 +1,8 @@
 import React from 'react';
 import SelectListButton from "./SelectListButton/SelectListButton";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const Dashboard = (props) => {
-    const todoLists = props.todoLists;
-    const getListById = props.getListById;
+const Dashboard = ({todoList, getListId}) => {
 
     return (
         <aside>
@@ -12,13 +10,13 @@ const Dashboard = (props) => {
             <ul>
                 <li><h4>Choose one:</h4></li>
                 {
-                    todoLists && todoLists.length
-                        ? todoLists.map((list, i) => <SelectListButton key={i} list={list} getListById={getListById} />)
+                    todoList.lists && todoList.lists.length
+                        ? todoList.lists.map((list, i) => <SelectListButton key={i} list={list} getListId={getListId} />)
                         : "You have not lists"
                 }
                 <li>
 	                <Link to="/today">
-		                <button></button>
+		                <button>Today</button>
 	                </Link>
                 </li>
             </ul>
