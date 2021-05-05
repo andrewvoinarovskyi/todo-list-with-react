@@ -7,8 +7,8 @@ const TodoItem = ({item, dispatch}) => {
             <input
                 type="checkbox"
                 className="checkbox"
-                checked={done}
-                onClick={() => dispatch({type: 'updateTodoItem', item})}/>
+                checked={!!done}
+                onChange={() => dispatch({type: 'updateTodoItem', item})}/>
             <p className="title">{title.toUpperCase()}</p>
             <p className="description">{description}</p>
             <p className="date">{date ? date.toDateString() : ''}</p>

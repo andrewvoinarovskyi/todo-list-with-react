@@ -11,8 +11,10 @@
  import reducer from './components/reducer/Reducer'
 
  import NewItemForm from "./components/NewItemForm";
- import TodoItems from "./components/TodoItems/TodoItems";
+ import TodoListPage from "./components/TodoListPage/TodoListPage";
  import Dashboard from "./components/Dashboard/Dashboard";
+ import TodayTasksPage from "./components/TodayTasksPage/TodayTasksPage";
+
 
 function App() {
 
@@ -44,13 +46,14 @@ function App() {
             </header>
             <div id="root">
                 <Dashboard todoList={todoList} getListId={getListId} />
-	              {selectedList !== 0
-                      ? <>
-                            <TodoItems todoList={ todoList.tasks } selectedList={selectedList} dispatch={dispatch} />
-                            <NewItemForm onSubmit={dispatch} listId={selectedList}/>
-	                    </>
-                      : <p>Choose todo list</p>
-	              }
+                {/*<Route path="/todo-list/:id">*/}
+                    {selectedList !== 0 &&
+                              <TodoListPage todoList={ todoList.tasks } listId={selectedList} dispatch={dispatch} />
+                    }
+                {/*</Route>*/}
+                <Route path="/today" >
+                    <TodayTasksPage todoList={todoList.tasks} listId={selectedList} dispatch={dispatch} />
+                </Route>
             </div>
         </section>
     );
