@@ -22,11 +22,11 @@ function App() {
             { id: 2, title: "second list" }
         ],
         tasks: [
-            {listId: 1, id: 1, title: 'bla bla', description: 'some new description', date: new Date(2021, 10, 22)},
-            {listId: 1, id: 2, title: 'second title', description: 'without description', date: new Date(2021, 10, 21)},
-            {listId: 1, id: 3, title: 'Use React', description: '', date: new Date(2021, 10, 20)},
-            {listId: 2, id: 1, title: 'bla bla', description: 'some new description', date: new Date(2021, 10, 22)},
-            {listId: 2, id: 2, title: 'second title', description: 'without description', date: new Date(2021, 10, 21)},
+            {listId: 1, id: 1, done: false, title: 'bla bla', description: 'some new description', date: new Date(2021, 10, 22)},
+            {listId: 1, id: 2, done: true, title: 'second title', description: 'without description', date: new Date(2021, 10, 21)},
+            {listId: 1, id: 3, done: false, title: 'Use React', description: '', date: new Date(2021, 10, 20)},
+            {listId: 2, id: 1, done: false, title: 'bla bla', description: 'some new description', date: new Date(2021, 10, 22)},
+            {listId: 2, id: 2, done: false, title: 'second title', description: 'without description', date: new Date(2021, 10, 21)},
         ],
     });
 

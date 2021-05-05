@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React, {useReducer, useState} from 'react'
 
 const reducer = (state, action) => {
     const { listId, id, item } = action;
@@ -16,7 +16,17 @@ const reducer = (state, action) => {
         case 'deleteTodoItem': {
             return {
                 lists: state.lists,
-                tasks: state.tasks.filter(todoItem => todoItem !== item),
+                tasks: state.tasks.filter(task => task !== item),
+            }
+        }
+        case 'updateTodoItem': {
+            const tasks = state.tasks.filter(task => task !== item);
+            const index = state.tasks.indexOf(item);
+            const taskForUpdate = state.tasks.filter(task => task === item)[0];
+            tasks.splice(index, 0, {...taskForUpdate, done: !taskForUpdate.done})
+            return {
+                lists: state.lists,
+                tasks: tasks,
             }
         }
 

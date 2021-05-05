@@ -1,10 +1,14 @@
 import React from "react";
 
 const TodoItem = ({item, dispatch}) => {
-    const { title, description, date } = item;
+    const { done, title, description, date } = item;
     return (
         <div className="item">
-            <input type="checkbox" className="checkbox"/>
+            <input
+                type="checkbox"
+                className="checkbox"
+                checked={done}
+                onClick={() => dispatch({type: 'updateTodoItem', item})}/>
             <p className="title">{title.toUpperCase()}</p>
             <p className="description">{description}</p>
             <p className="date">{date ? date.toDateString() : ''}</p>
