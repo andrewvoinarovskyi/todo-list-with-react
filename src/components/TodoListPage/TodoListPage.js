@@ -2,8 +2,11 @@ import React, {useEffect, useCallback} from "react";
 
 import TodoItem from "./TodoItem/TodoItem";
 import NewItemForm from "../NewItemForm";
+import {useParams} from "react-router-dom";
 
 const TodoListPage = ({ todoList, listId, dispatch }) => {
+
+    let { id } = useParams()
 
     const handler = useCallback(({type, data}) => {
         dispatch({type, data});
