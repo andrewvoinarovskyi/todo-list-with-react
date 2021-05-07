@@ -1,11 +1,22 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import SelectListButton from "./SelectListButton/SelectListButton";
 import { Link } from "react-router-dom";
 import store from "../../store";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { loadDashboard } from "../../store/dashboard/actions";
 
-const Dashboard = ({todoList, getListId}) => {
 
+const Dashboard = () => {
 
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(loadDashboard())
+        console.log(state)
+    }, [])
+
+    const state = useSelector(state => state.dashboard)
+    console.log(state)
 
     return (
         <aside>
@@ -13,8 +24,8 @@ const Dashboard = ({todoList, getListId}) => {
             <ul>
                 <li><h4>Choose one:</h4></li>
                 {
-                    todoList && todoList.length
-                        ? todoList.map((list, i) => <SelectListButton key={i} list={list} getListId={getListId} />)
+                    state.lists && state.lists.length
+                        ? state.lists.map((list, i) => <SelectListButton key={i} list={list} />)
                         : "You have not lists"
                 }
                 {/*<li>*/}

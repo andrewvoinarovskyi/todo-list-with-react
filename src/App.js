@@ -1,5 +1,7 @@
  import './App.css';
  import { useEffect, useReducer, useState, useCallback } from "react";
+ import { useSelector, useDispatch } from "react-redux";
+ import { loadDashboard } from "./store/dashboard/actions";
  import {
 	 BrowserRouter as Router,
 	 Switch,
@@ -11,12 +13,9 @@
  import { getLists } from "./components/actions/getLists";
  import store from "./store";
 
- import reducer from './components/reducers/Reducer'
-
- import NewItemForm from "./components/NewItemForm";
  import TodoListPage from "./components/TodoListPage/TodoListPage";
  import Dashboard from "./components/Dashboard/Dashboard";
- import TodayTasksPage from "./components/TodayTasksPage/TodayTasksPage";
+ import TodayTasksPage from "./components/TodayTasksPage/TodayTasksPage"
 
 
 function App() {
