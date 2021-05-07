@@ -1,26 +1,19 @@
 import React, {useState} from "react";
 
-const TodoItem = ({item, dispatch}) => {
+const TodoItem = ({item}) => {
     const { done, title, description, dueDate } = item;
-    const [date, setDate] = useState()
-    if (dueDate !== null) {
-        const date = new Date(dueDate);
-        setDate(date);
-    } else {
-        setDate('');
-    }
-
+    const date = dueDate !== null ? new Date(dueDate).toDateString() : null;
     return (
         <div className="item">
             <input
                 type="checkbox"
                 className="checkbox"
                 checked={!!done}
-                onChange={() => dispatch({type: 'updateTodoItem', item})}/>
+                /*onChange={() => dispatch({type: 'updateTodoItem', item})}*//>
             <p className="title">{title.toUpperCase()}</p>
             <p className="description">{description}</p>
             <p className="date">{date}</p>
-            <button className="delete" onClick={() => dispatch({type: 'deleteTodoItem', item})}>{'\u{1F5D1}'}</button>
+            <button className="delete" /*onClick={() => dispatch({type: 'deleteTodoItem', item})}*/>{'\u{1F5D1}'}</button>
         </div>
     )
 }

@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import SelectListButton from "./SelectListButton/SelectListButton";
 import { Link } from "react-router-dom";
-import store from "../../store";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { loadDashboard } from "../../store/dashboard/actions";
 
@@ -12,7 +11,6 @@ const Dashboard = () => {
 
     useEffect(() => {
         dispatch(loadDashboard())
-        console.log(state)
     }, [])
 
     const state = useSelector(state => state.dashboard)
@@ -25,7 +23,7 @@ const Dashboard = () => {
                 <li><h4>Choose one:</h4></li>
                 {
                     state.lists && state.lists.length
-                        ? state.lists.map((list, i) => <SelectListButton key={i} list={list} />)
+                        ? state.lists.map((list, i) => <SelectListButton key={i} list={list} /> )
                         : "You have not lists"
                 }
                 {/*<li>*/}

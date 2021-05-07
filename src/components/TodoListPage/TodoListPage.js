@@ -1,33 +1,28 @@
-import React, {useEffect, useCallback} from "react";
+import React, { useEffect } from "react";
+import { loadTasks } from "../../store/tasks/actions";
 
 import TodoItem from "./TodoItem/TodoItem";
 import NewItemForm from "../NewItemForm";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
-const TodoListPage = ({ todoList, listId, dispatch }) => {
+const EMPTY_ARRAY = [];
+
+const TodoListPage = () => {
 
     let { id } = useParams()
-
-    const handler = useCallback(({type, data}) => {
-        dispatch({type, data});
-    }, [dispatch]);
-
+    const tasks = useSelector(state => state.tasks[id] || EMPTY_ARRAY)
+    const dispatch = useDispatch()
     useEffect(() => {
-        fetch('http://127.0.0.1:5000/lists/' + listId)
-            .then(response => response.json())
-            .then(data => handler({type: 'getTasks', data}))
-            .catch(() => console.log("can`t get tasks"))
-        return () => dispatch({type: 'getTasks', data: []})
-        },
-        [listId]
-    );
+        dispatch(loadTasks(id))
+    }, [id])
 
     return (
         <div id="list">
-            { todoList && todoList.length ? todoList.map((item, i) => <TodoItem item={item} key={i} dispatch={dispatch} />)
+            { tasks.length ? tasks.map( item => <TodoItem item={item} key={item.id} />)
                                 : <p>There are no one task here</p>
             }
-            <NewItemForm onSubmit={dispatch} listId={listId}/>
+            <NewItemForm listId={id}/>
         </div>
     )
 }

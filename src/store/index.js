@@ -1,17 +1,22 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
+import {composeWithDevTools} from "redux-devtools-extension";
 import thunk from 'redux-thunk';
 
 import dashboardReducer from './dashboard/reducer';
-import tasksReducer from './tasks/reducer';
+import tasksReducer from "./tasks/reducer";
 
 export const rootReducer = combineReducers({
     dashboard: dashboardReducer,
     tasks: tasksReducer
 });
 
+const composedEnhancer = composeWithDevTools(
+    applyMiddleware(thunk)
+)
+
 const store = createStore(
     rootReducer,
-    applyMiddleware(thunk),
-    // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    composedEnhancer,
 );
+
 export default store;

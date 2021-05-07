@@ -1,8 +1,8 @@
-import { DASHBOARD_LOADED } from './actions'
+import { DASHBOARD_LOADED } from './actions';
 import { combineReducers } from "redux";
 
 function openedTasksReducer(state = {}, action) {
-    return {state}
+    return state
 }
 
 export default combineReducers({

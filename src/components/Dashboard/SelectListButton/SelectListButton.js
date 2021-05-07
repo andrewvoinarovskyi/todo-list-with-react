@@ -4,10 +4,11 @@ import store from "../../../store";
 import { getTasks } from "../../actions/getTasks";
 
 const SelectListButton = ({ list }) => {
-
     return (
         <li>
-            <button onClick={() => getTasks(list.id)} >{list.title}</button>
+            <Link to={'/todo-list/' + list.id}>
+                <button>{list.title}</button>
+            </Link>
         </li>
     );
 };

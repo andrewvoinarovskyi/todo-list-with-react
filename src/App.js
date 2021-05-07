@@ -9,9 +9,6 @@
 	 Link,
 	 useParams
  } from "react-router-dom";
- import { GET_LISTS } from "./components/actions/types";
- import { getLists } from "./components/actions/getLists";
- import store from "./store";
 
  import TodoListPage from "./components/TodoListPage/TodoListPage";
  import Dashboard from "./components/Dashboard/Dashboard";
