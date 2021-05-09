@@ -1,20 +1,21 @@
 import React, { useState } from "react";
+import {useDispatch} from "react-redux";
+import {ADD_TASK, addNewTask} from "../store/tasks/actions";
 
-function NewItemForm ({ listId, onSubmit }) {
-    const [id, setId] = useState(4);
+function NewItemForm ({ listId }) {
 
-    const [todoItem, setItem] = useState({
+    const [item, setItem] = useState({
         title: '',
         description: '',
         date: '',
-        });
+    });
+
+    const dispatch = useDispatch();
 
     const onSubmitHandler = (event) => {
         event.preventDefault();
-        console.log(listId)
-        onSubmit({type: 'addTodoItem', listId, id, item: todoItem});
+        dispatch(addNewTask(item, listId));
         event.currentTarget.reset();
-        setId(id + 1);
     }
 
     return (

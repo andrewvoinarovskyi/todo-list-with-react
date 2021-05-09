@@ -46,6 +46,7 @@ const reducer = (state = initialState, action) => {
                 tasks: tasks,
             }
         }
+
         default: return state
     }
 }

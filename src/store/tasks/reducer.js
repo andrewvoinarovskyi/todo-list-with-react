@@ -1,4 +1,4 @@
-import { TASKS_LOADED, UPDATE_TASK, DELETE_TASK } from './actions'
+import {TASKS_LOADED, UPDATE_TASK, DELETE_TASK, ADD_TASK} from './actions'
 
 
 const tasksReducer = (lists={}, { type, listId, tasks, item }) => {
@@ -19,9 +19,14 @@ const tasksReducer = (lists={}, { type, listId, tasks, item }) => {
 		        }
 	      case DELETE_TASK:
 		        const listWithoutDeleted = lists[`${listId}`].filter(task => task !== item);
-		        return{
+		        return {
 	    	    	  ...lists,
 			          [listId]: listWithoutDeleted
+		        }
+	      case ADD_TASK:
+	      	  return {
+	      	  	  ...lists,
+			          [listId]: [...lists[listId], item],
 		        }
 
         default:

@@ -1,9 +1,9 @@
-import {URL} from "../../url";
-import {loadDashboard} from "../dashboard/actions";
+import { URL } from "../../url";
 
 export const TASKS_LOADED = 'tasks/loaded'
 export const UPDATE_TASK = 'update_task'
 export const DELETE_TASK = 'delete_task'
+export const ADD_TASK = 'add_task'
 
 export const loadTasks = (listId) => (dispatch) => {
     fetch(URL + `lists/${listId}`)
@@ -43,4 +43,20 @@ export const deleteTask = (item) => (dispatch) => {
 						listId: item.todoListId,
 						item,
 		}))
+}
+
+export const addNewTask = (item, listId) => (dispatch) => {
+		return fetch(URL + `lists/${listId}`, {
+				method: 'POST',
+				headers:  {
+						'Content-Type': 'application/json-patch+json'
+				},
+				body: JSON.stringify(item)
+		})
+				.then(res => res.json())
+				.then((task) => dispatch({
+						type: ADD_TASK,
+						listId,
+						item: task,
+				}))
 }
