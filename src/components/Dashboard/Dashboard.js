@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect } from 'react';
 import SelectListButton from "./SelectListButton/SelectListButton";
-import { Link } from "react-router-dom";
-import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loadDashboard } from "../../store/dashboard/actions";
 
 

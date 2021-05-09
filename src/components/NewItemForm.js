@@ -20,7 +20,6 @@ function NewItemForm ({ listId, onSubmit }) {
     return (
         <form
           id="new-item-form"
-          className="item"
           onSubmit={onSubmitHandler}
           onChange={(event) => {
               const {title, description, date} = event.currentTarget;
