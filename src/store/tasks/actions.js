@@ -36,13 +36,13 @@ export const updateTask = (item, isToday) => (dispatch) => {
 		}))
 }
 
-export const deleteTask = (item) => (dispatch) => {
+export const deleteTask = (item, isToday) => (dispatch) => {
 		return fetch(URL + `lists/${item.todoListId}/${item.id}`, {
 				method: 'DELETE',
 		})
 				.then(() => dispatch({
 						type: DELETE_TASK,
-						listId: item.todoListId,
+						listId: isToday ? 'today' : item.todoListId,
 						item,
 		}))
 }

@@ -18,7 +18,7 @@ const tasksReducer = (lists={}, { type, listId, tasks, item }) => {
 			          [listId]: listForUpdate,
 		        }
 	      case DELETE_TASK:
-		        const listWithoutDeleted = lists[`${listId}`].filter(task => task !== item);
+		        const listWithoutDeleted = lists[listId].filter(task => task !== item);
 		        return {
 	    	    	  ...lists,
 			          [listId]: listWithoutDeleted

@@ -27,7 +27,7 @@ const TodoItem = ({ item, list }) => {
 	              </Link>
 	          }
             <p className="date">{date}</p>
-            <button className="delete" onClick={() => dispatch(deleteTask(item))} >{'\u{1F5D1}'}</button>
+            <button className="delete" onClick={() => dispatch(deleteTask(item, isToday))} >{'\u{1F5D1}'}</button>
         </div>
     )
 }
