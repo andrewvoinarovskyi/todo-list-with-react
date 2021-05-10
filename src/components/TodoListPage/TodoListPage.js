@@ -6,7 +6,7 @@ import NewItemForm from "../NewItemForm";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-const EMPTY_ARRAY = [];
+export const EMPTY_ARRAY = [];
 
 const TodoListPage = () => {
 
@@ -19,8 +19,8 @@ const TodoListPage = () => {
 
     return (
         <div id="list">
-            { tasks.length ? tasks.map( item => <TodoItem item={item} key={item.id} />)
-                                : <p>There are no one task here</p>
+            { tasks.length ? tasks.map(item => <TodoItem item={item} key={item.id} />)
+	                         : <p>There are no one task here</p>
             }
             <NewItemForm listId={id}/>
         </div>

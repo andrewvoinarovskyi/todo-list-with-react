@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import SelectListButton from "./SelectListButton/SelectListButton";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 import { loadDashboard } from "../../store/dashboard/actions";
 
 
@@ -25,11 +27,11 @@ const Dashboard = () => {
                         ? state.lists.map((list, i) => <SelectListButton key={i} list={list} /> )
                         : "You have not lists"
                 }
-                {/*<li>*/}
-	            {/*    <Link to="/today">*/}
-		        {/*        <button>Today</button>*/}
-	            {/*    </Link>*/}
-                {/*</li>*/}
+                <li>
+	                <Link to="/today">
+		                <button>Today</button>
+	                </Link>
+                </li>
             </ul>
         </aside>
     );

@@ -4,6 +4,7 @@ export const TASKS_LOADED = 'tasks/loaded'
 export const UPDATE_TASK = 'update_task'
 export const DELETE_TASK = 'delete_task'
 export const ADD_TASK = 'add_task'
+export const LOAD_TODAY = 'collection/today'
 
 export const loadTasks = (listId) => (dispatch) => {
     fetch(URL + `lists/${listId}`)
@@ -15,7 +16,7 @@ export const loadTasks = (listId) => (dispatch) => {
         }))
 }
 
-export const updateTask = (item) => (dispatch) => {
+export const updateTask = (item, isToday) => (dispatch) => {
 		fetch(URL + `lists/${item.todoListId}/${item.id}`, {
 				method: 'PATCH',
 				headers:  {
@@ -27,9 +28,10 @@ export const updateTask = (item) => (dispatch) => {
 						value : !item.done
 				}])
 		})
+				.then(res => res.json())
 				.then(() => dispatch({
 						type: UPDATE_TASK,
-						listId: item.todoListId,
+						listId: isToday ? 'today' : item.todoListId,
 						item,
 		}))
 }
@@ -58,5 +60,14 @@ export const addNewTask = (item, listId) => (dispatch) => {
 						type: ADD_TASK,
 						listId,
 						item: task,
+				}))
+}
+
+export const loadTodayTasks = () => (dispatch) => {
+		fetch(URL + 'collection/today')
+				.then(res => res.json())
+				.then(tasks => dispatch({
+						type: LOAD_TODAY,
+						tasks
 				}))
 }
